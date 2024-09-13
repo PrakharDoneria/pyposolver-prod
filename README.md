@@ -1,110 +1,135 @@
-# pyposolver
+# PyPoSolver
 
-pyposolver is a Python library for mathematical and physics calculations. It provides functions for various mathematical operations and physics calculations, including numerical methods, integration, root-finding, linear algebra, and more.
+**PyPoSolver** is a Python library for performing mathematical and physics calculations, including numerical integration, root-finding, linear algebra operations, and basic mechanics.
 
 ## Installation
 
-You can install pyposolver using pip:
-
 ```bash
-pip install pyposolver
+pip install pyposolver 
 ```
 
 ## Usage
 
-### Numerical Methods
+### Mathematics
 
-#### Bisection Method
+#### Integration
 
-```python
-from pyposolver.maths.root_finding import bisection_method
-```
-
-# Define a test function
-def f(x):
-    return x**3 - 6*x**2 + 11*x - 6
-
-# Find the root of f(x) = x^3 - 6x^2 + 11x - 6 in the interval [1, 3]
-root = bisection_method(f, 1, 3)
-print("Root:", root)
-```
-
-#### Newton-Raphson Method
-
-```python
-from pyposolver.maths.root_finding import newton_raphson_method
-
-# Define a test function and its derivative
-def f(x):
-    return x**3 - 6*x**2 + 11*x - 6
-
-def df(x):
-    return 3*x**2 - 12*x + 11
-
-# Find the root of f(x) = x^3 - 6x^2 + 11x - 6 with an initial guess of 2
-root = newton_raphson_method(f, df, 2)
-print("Root:", root)
-```
-
-### Integration
-
-#### Trapezoidal Rule
+Use the `trapezoidal_rule` function to perform numerical integration:
 
 ```python
 from pyposolver.maths.integration import trapezoidal_rule
 
-# Define a test function
 def f(x):
     return x**2
 
-# Integrate f(x) = x^2 from 0 to 1 using the trapezoidal rule
-result = trapezoidal_rule(f, 0, 1)
-print("Result of integration:", result)
+result = trapezoidal_rule(f, 0, 1, 100)  # Integrate f(x) from 0 to 1 using 100 intervals
+print(result)  # Expected: 0.333...
 ```
 
-### Linear Algebra
+#### Root-Finding
 
-#### Dot Product
+- **Bisection Method**
+
+Use `bisection_method` to find the root of a function within a specified interval:
+
+```python
+from pyposolver.maths.root_finding import bisection_method
+
+def f(x):
+    return x**2 - 4
+
+root = bisection_method(f, 0, 3)  # Find root of f(x) in the interval [0, 3]
+print(root)  # Expected: 2.0
+```
+
+- **Newton-Raphson Method**
+
+Use `newton_raphson_method` for root-finding with an initial guess and the function's derivative:
+
+```python
+from pyposolver.maths.root_finding import newton_raphson_method
+
+def f(x):
+    return x**3 - 2*x - 5
+
+def df(x):
+    return 3*x**2 - 2
+
+root = newton_raphson_method(f, df, 2)  # Initial guess: 2
+print(root)  # Expected: 2.094...
+```
+
+#### Linear Algebra
+
+- **Dot Product**
+
+Calculate the dot product of two vectors:
 
 ```python
 from pyposolver.maths.linear_algebra import dot_product
 
-# Define two vectors
 vector1 = [1, 2, 3]
 vector2 = [4, 5, 6]
 
-# Calculate the dot product of the two vectors
 result = dot_product(vector1, vector2)
-print("Dot Product:", result)
+print(result)  # Expected: 32
 ```
 
-### Physics Calculations
+- **Cross Product**
 
-#### Velocity
+Compute the cross product of two 3D vectors:
+
+```python
+from pyposolver.maths.linear_algebra import cross_product
+
+vector1 = [1, 2, 3]
+vector2 = [4, 5, 6]
+
+result = cross_product(vector1, vector2)
+print(result)  # Expected: [-3, 6, -3]
+```
+
+- **Matrix Multiplication**
+
+Multiply two matrices:
+
+```python
+from pyposolver.maths.linear_algebra import matrix_multiply
+
+matrix1 = [[1, 2], [3, 4]]
+matrix2 = [[5, 6], [7, 8]]
+
+result = matrix_multiply(matrix1, matrix2)
+print(result)  # Expected: [[19, 22], [43, 50]]
+```
+
+### Physics
+
+- **Velocity**
+
+Calculate velocity given initial velocity, acceleration, and time:
 
 ```python
 from pyposolver.physics.mechanics import velocity
 
-# Calculate the final velocity using the kinematic equation: v = u + at
-initial_velocity = 10  # m/s
-acceleration = 2  # m/s^2
-time = 5  # seconds
-final_velocity = velocity(initial_velocity, acceleration, time)
-print("Final Velocity:", final_velocity)
+initial_velocity = 5
+acceleration = 2
+time = 3
+
+result = velocity(initial_velocity, acceleration, time)
+print(result)  # Expected: 11
 ```
 
-#### Electric Field Strength
+- **Force**
+
+Calculate force using mass and acceleration:
 
 ```python
-from pyposolver.physics.electromagnetism import electric_field_strength
+from pyposolver.physics.mechanics import force
 
-# Calculate the electric field strength due to a point charge
-charge = 2e-6  # Coulombs
-distance = 0.1  # meters
-electric_field = electric_field_strength(charge, distance)
-print("Electric Field Strength:", electric_field)
+mass = 10
+acceleration = 5
+
+result = force(mass, acceleration)
+print(result)  # Expected: 50
 ```
-
-## Contributing
-
-Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue on GitHub or submit a pull request.# pyposolver-prod
